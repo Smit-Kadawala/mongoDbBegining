@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const parser = require("body-parser");
 const bodyParser = require("body-parser");
 
+const UserRoutes = require("./routes/UserRoutes");
+
 mongoose.connect("mongodb://localhost:27017/testdb");
 const db = mongoose.connection;
 
@@ -26,3 +28,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is Running on PORT ${PORT}`);
 });
+
+app.use("/api/user", UserRoutes);
