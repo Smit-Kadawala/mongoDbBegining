@@ -34,10 +34,10 @@ const show = (req, res, next) => {
 // Add New User
 const store = (req, res, next) => {
   let userInfo = new UserData({
-    userName: req.body.name,
-    userEmailId: req.body.emailId,
-    userPassword: req.body.password,
-    userAge: req.body.age,
+    userName: req.body.userName,
+    userEmailId: req.body.userEmailId,
+    userPassword: req.body.userPassword,
+    userAge: req.body.userAge,
     userIsActive: req.body.userIsActive ? req.body.userIsActive : 0,
   });
   userInfo
@@ -56,16 +56,19 @@ const store = (req, res, next) => {
 
 // update Emp
 const updateUser = (req, res, next) => {
-  let userEmailId = req.body.emailId;
+  let userEmailId = req.body.userEmailId;
   let updateUserInfo = {
-    userName: req.body.name,
-    userEmailId: req.body.emailId,
-    userPassword: req.body.password,
-    userAge: req.body.age,
+    userName: req.body.userName,
+    userEmailId: req.body.userEmailId,
+    userPassword: req.body.userPassword,
+    userAge: req.body.userAge,
     userIsActive: req.body.userIsActive ? req.body.userIsActive : 0,
   };
 
-  UserData.findOneAndUpdate(userEmailId, { $set: updateUserInfo })
+  UserData.findOneAndUpdate(
+    { userEmailId: userEmailId },
+    { $set: updateUserInfo }
+  )
     .then((response) => {
       res.json({
         message: "User Updated In System",
@@ -80,8 +83,8 @@ const updateUser = (req, res, next) => {
 
 // Delet User
 const destroy = (req, res, next) => {
-  let userEmailId = req.body.emailId;
-  UserData.findOneAndRemove(userEmailId)
+  let userEmailId = req.body.userEmailId;
+  UserData.findOneAndRemove({ userEmailId: userEmailId })
     .then((response) => {
       res.json({
         message: "User delete In System",

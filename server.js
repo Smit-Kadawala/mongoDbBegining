@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 const UserRoutes = require("./routes/UserRoutes");
 
-mongoose.connect("mongodb://localhost:27017/testdb");
+mongoose.connect("mongodb://localhost:27017/movieAiDb");
 const db = mongoose.connection;
 
 db.on("error", (err) => {
@@ -29,4 +29,4 @@ app.listen(PORT, () => {
   console.log(`Server is Running on PORT ${PORT}`);
 });
 
-app.use("/api/user", UserRoutes);
+app.use("/api", UserRoutes);
